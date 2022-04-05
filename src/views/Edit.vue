@@ -16,20 +16,21 @@
       type="text"
       id="postTitle"
       v-model="title"
-      :placeholder="post.slice(0, 15) + '...'"
+      :placeholder="post.postTitle + '...'"
     />
-    <textarea v-model="msg" :placeholder="post" id="postMsg"></textarea>
+    <textarea v-model="msg" :placeholder="post.postMsg" id="postMsg"></textarea>
   </div>
 </template>
 
 <script>
 import { updatePost } from "../firebase";
+import postsData from "../data/Posts.json";
 
 export default {
   name: "edit",
   data() {
     return {
-      post: this.$route.params.post,
+      post: postsData[this.$route.params.post]||{postTitle:"Invalid",postMsg:"Invalid"},
       title: "",
       msg: ""
     };

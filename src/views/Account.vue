@@ -90,7 +90,7 @@
         </b-card-header>
         <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <b-card-text v-for="post in posts" :key="post.id">
+            <b-card-text v-for="(post,idx) in posts" :key="`${idx}-ax`">
               <h2 class="card-title">{{ post.postTitle }}</h2>
               <button
                 v-if="post.merchant"
@@ -103,7 +103,7 @@
               <button
                 type="button"
                 class="btn btn-outline-warning"
-                @click="Update(post)"
+                @click="Update(idx)"
               >
                 Edit
               </button>
@@ -187,7 +187,7 @@ export default {
       });
     },
     Update(post){
-      this.$router.push('/edit/' + {title:post.postTitle , msg:post.postMsg})
+      this.$router.push('/edit/' + post)
     },
     Delete(post) {
       deletePost(post)
